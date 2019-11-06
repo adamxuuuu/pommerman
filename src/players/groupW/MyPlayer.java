@@ -1,4 +1,4 @@
-package players.assignment;
+package players.groupW;
 
 import core.GameState;
 import players.Player;
@@ -30,7 +30,7 @@ public class MyPlayer extends ParameterizedPlayer {
         this(seed, pId, new MyParams());
     }
 
-    private MyPlayer(long seed, int id, MyParams params){
+    public MyPlayer(long seed, int id, MyParams params){
         super(seed, id, params);
         reset(seed, id);
 
@@ -39,6 +39,18 @@ public class MyPlayer extends ParameterizedPlayer {
         int i = 0;
         for (Types.ACTIONS act : actionsList) {
             actions[i++] = act;
+        }
+    }
+
+    @Override
+    public void reset(long seed, int playerID) {
+        super.reset(seed, playerID);
+        m_rnd = new Random(seed);
+
+        this.params = (MyParams) getParameters();
+        if (this.params == null) {
+            this.params = new MyParams();
+            super.setParameters(this.params);
         }
     }
 
@@ -55,7 +67,8 @@ public class MyPlayer extends ParameterizedPlayer {
         m_root.setRootGameState(gs);
 
         //Determine the action using MCTS...
-        m_root.mctsSearch(ect);
+        OpponentModel model = new OpponentModel(gs, this);
+        m_root.mctsSearch(ect, model);
 
         //Determine the best action to take and return it.
         int action = m_root.mostVisitedAction();

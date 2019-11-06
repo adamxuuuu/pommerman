@@ -2,16 +2,14 @@ package players.optimisers.ntbea;
 
 import core.Game;
 import players.Player;
+import players.SimplePlayer;
+import players.mcts.MCTSParams;
 import players.mcts.MCTSPlayer;
 import players.optimisers.ParameterizedPlayer;
-import players.optimisers.evodef.EvaluatePommerman;
-import players.rhea.RHEAPlayer;
-import players.rhea.utils.RHEAParams;
 import utils.Types;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 import static utils.Types.NUM_PLAYERS;
 
@@ -23,14 +21,14 @@ public class RunPlayerSolution {
     public static void main(String[] args) {
         long seed = System.currentTimeMillis();
 
-        RHEAParams parameterSet = new RHEAParams();
-        ParameterizedPlayer player = new RHEAPlayer(0, 0, parameterSet);
+//        RHEAParams parameterSet = new RHEAParams();
+//        ParameterizedPlayer player = new RHEAPlayer(0, 0, parameterSet);
 
-//        MCTSParams parameterSet = new MCTSParams();
-//        ParameterizedPlayer player = new MCTSPlayer(0, 0, parameterSet);
+        MCTSParams parameterSet = new MCTSParams();
+        ParameterizedPlayer player = new MCTSPlayer(0, 0, parameterSet);
 
         // Set parameter genome
-        int[] solution = new int[]{1, 1, 1, 1, 0, 5, 1, 1, 0, 0, 0, 0};
+        int[] solution = new int[]{1, 3, 1};
         boolean topLevel = true;
         player.getParameters().translate(solution, topLevel);
 //        player.getParameters().printParameters();
@@ -52,7 +50,7 @@ public class RunPlayerSolution {
             // Create opponents
             for (int j = 0; j < NUM_PLAYERS; j++) {
                 if (j != i) {
-                    players[j] = new MCTSPlayer(seed, Types.TILETYPE.AGENT0.getKey() + j);
+                    players[j] = new SimplePlayer(seed, Types.TILETYPE.AGENT0.getKey() + j);
                 }
             }
 

@@ -1,4 +1,4 @@
-package players.assignment;
+package players.groupW;
 
 import players.optimisers.ParameterSet;
 import utils.Pair;
@@ -8,29 +8,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyParams implements ParameterSet {
-    // Constants
-    public final double HUGE_NEGATIVE = -1000;
-    public final double HUGE_POSITIVE =  1000;
 
-    public final int STOP_TIME = 0;
-    public final int STOP_ITERATIONS = 1;
-    public final int STOP_FMCALLS = 2;
+    final int STOP_TIME = 0;
+    final int STOP_ITERATIONS = 1;
+    final int STOP_FMCALLS = 2;
 
-    public final int CUSTOM_HEURISTIC = 0;
-    public final int ADVANCED_HEURISTIC = 1;
+    final int CUSTOM_HEURISTIC = 0;
+    final int ADVANCED_HEURISTIC = 1;
 
-    public double epsilon = 1e-6;
+    double epsilon = 1e-6;
 
     // Parameters
-    public double K = Math.sqrt(2);
-    public int rollout_depth = 8;//10;
-    public int heuristic_method = CUSTOM_HEURISTIC;
+    double K = Math.sqrt(2);
+    int rollout_depth = 8;//10;
+    int heuristic_method = ADVANCED_HEURISTIC;
 
     // Budget settings
-    public int stop_type = STOP_TIME;
-    public int num_iterations = 200;
-    public int num_fmcalls = 2000;
-    public int num_time = 40;
+    int stop_type = STOP_TIME;
+    int num_iterations = 200;
+    int num_fmcalls = 2000;
+    int num_time = 40;
 
     @Override
     public void setParameterValue(String param, Object value) {

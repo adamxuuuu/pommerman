@@ -1,5 +1,7 @@
 import core.Game;
 import players.*;
+import players.groupW.MyParams;
+import players.groupW.MyPlayer;
 import players.mcts.MCTSParams;
 import players.mcts.MCTSPlayer;
 import players.rhea.RHEAPlayer;
@@ -7,7 +9,8 @@ import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
 import utils.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static utils.Types.VISUALS;
 
@@ -27,6 +30,7 @@ public class Run {
         System.out.println("\t\t 3 SimplePlayer");
         System.out.println("\t\t 4 RHEA 200 itereations, shift buffer, pop size 1, random init, length: 12");
         System.out.println("\t\t 5 MCTS 200 iterations, length: 12");
+        System.out.println("\t\t 6 MyPlayer");
     }
 
     public static void main(String[] args) {
@@ -57,7 +61,7 @@ public class Run {
             int N = Integer.parseInt(args[2]);
             Types.DEFAULT_VISION_RANGE = Integer.parseInt(args[3]);
 
-            long seeds[];
+            long[] seeds;
 
             if (S == -1)
             {
@@ -121,6 +125,11 @@ public class Run {
                         p = new MCTSPlayer(seed, playerID++, mctsParams);
                         playerStr[i-4] = "MCTS";
                         break;
+                    case 6:
+                        MyParams myParams = new MyParams();
+
+                        p = new MyPlayer(seed, playerID++, myParams);
+                        playerStr[i-4] = "MyPlayer";
                     default:
                         System.out.println("WARNING: Invalid agent ID: " + agentType );
                 }
@@ -179,7 +188,7 @@ public class Run {
         g.run(frame, wi, separateThreads);
     }
 
-    public static void runGames(Game g, long seeds[], int repetitions, boolean useSeparateThreads){
+    public static void runGames(Game g, long[] seeds, int repetitions, boolean useSeparateThreads){
         int numPlayers = g.getPlayers().size();
         int[] winCount = new int[numPlayers];
         int[] tieCount = new int[numPlayers];

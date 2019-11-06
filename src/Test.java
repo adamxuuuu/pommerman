@@ -1,12 +1,14 @@
 import core.Game;
-import players.*;
-import utils.Types;
-import players.rhea.utils.Constants;
-import players.mcts.MCTSPlayer;
+import players.KeyController;
+import players.Player;
+import players.groupW.MyParams;
+import players.groupW.MyPlayer;
 import players.mcts.MCTSParams;
+import players.mcts.MCTSPlayer;
 import players.rhea.RHEAPlayer;
+import players.rhea.utils.Constants;
 import players.rhea.utils.RHEAParams;
-
+import utils.Types;
 
 import java.util.ArrayList;
 
@@ -37,8 +39,11 @@ public class Test {
         RHEAParams rheaParams = new RHEAParams();
         rheaParams.heurisic_type = Constants.CUSTOM_HEURISTIC;
 
-        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
-        //players.add(new MCTSPlayer(seed, playerID++, mctsParams));
+        MyParams myParams = new MyParams();
+
+        players.add(new MyPlayer(seed, playerID++, myParams));
+//        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
+//        players.add(new MCTSPlayer(seed, playerID++, mctsParams));
 
 //        players.add(new SimplePlayer(seed, playerID++));
         players.add(new RHEAPlayer(seed, playerID++, rheaParams));

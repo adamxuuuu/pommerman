@@ -1,11 +1,9 @@
 package players.optimisers.ntbea;
 
-import players.optimisers.ParameterizedPlayer;
-import players.optimisers.evodef.EvaluatePommerman;
 import players.mcts.MCTSParams;
 import players.mcts.MCTSPlayer;
-import players.rhea.RHEAPlayer;
-import players.rhea.utils.RHEAParams;
+import players.optimisers.ParameterizedPlayer;
+import players.optimisers.evodef.EvaluatePommerman;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +18,12 @@ public class RunNTBEA {
         int nEvals = Integer.parseInt(args[0]);
         boolean topLevel = Boolean.parseBoolean(args[1]);
 
-        RHEAParams parameterSet = new RHEAParams();
-        ParameterizedPlayer player = new RHEAPlayer(0, 0, parameterSet);
-        parameterSet.printParameterSearchSpace();
+//        RHEAParams parameterSet = new RHEAParams();
+//        ParameterizedPlayer player = new RHEAPlayer(0, 0, parameterSet);
 
-//        MCTSParams parameterSet = new MCTSParams();
-//        ParameterizedPlayer player = new MCTSPlayer(0, 0, parameterSet);
+        MCTSParams parameterSet = new MCTSParams();
+        ParameterizedPlayer player = new MCTSPlayer(0, 0, parameterSet);
+        parameterSet.printParameterSearchSpace();
 
         // Optimising parameters
         Map<String, Object[]> params = parameterSet.getParameterValues();
